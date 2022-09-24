@@ -1,6 +1,7 @@
 package yebelo.nayan.assignment.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,11 +20,16 @@ public class MyUserService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		MyUser user = myUserRepository.getByUsername(username);
-		return User.withUsername(user.getUsername()).password(user.getPassword()).roles("USER").build();
+		if (user == null) {
+			throw new UsernameNotFoundException(username+" Not Found");
+		}
+		return User.builder().username(user.getUsername()).password(user.getPassword()).roles("USER")
+				.build();
 		
 	}
-	public void addUser(MyUser user) {
+	public void addUser(MyUser user) throws DataIntegrityViolationException {
 		myUserRepository.save(user);
+		
 	}
 
 }

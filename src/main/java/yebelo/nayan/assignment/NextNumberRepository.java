@@ -8,5 +8,7 @@ import yebelo.nayan.assignment.model.NextNumber;
 @Repository
 public interface NextNumberRepository extends CrudRepository<NextNumber, Integer>{
 
-	public NextNumber getByCode(int code);
+	public NextNumber getByCategoryCode(int code);
+	public NextNumber getByCategoryCodeAndUserId(int code,int id);
+
 }

@@ -1,15 +1,21 @@
 package yebelo.nayan.assignment;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import yebelo.nayan.assignment.model.Code;
 import yebelo.nayan.assignment.model.MyUser;
 import yebelo.nayan.assignment.model.NextNumber;
+import yebelo.nayan.assignment.model.Values;
 import yebelo.nayan.assignment.service.MyUserService;
 import yebelo.nayan.assignment.service.NextNumberService;
 
@@ -24,19 +30,24 @@ public class FetchNumberController {
 	MyUserService myUserService;
 
 	@GetMapping("/FetchNextNumber")
-	public NextNumber fecthBycode(@RequestBody Code c) {
+	public Values fecthBycode(@RequestBody Code c,Principal principal) {
 		int categoryCode = c.getCategoryCode();
-		return nextNumberService.getNumberByCode(categoryCode);
+		return nextNumberService.getNumberByCode(categoryCode,principal.getName());
 	}
 	
 	@PostMapping("/addNumber")
-	public void AddNumber( @RequestBody NextNumber number) {
+	public void AddNumber( @RequestBody NextNumber number,Principal principal) {
 		
-		nextNumberService.addNextNumber(number);
+		nextNumberService.addNextNumber(number,principal.getName());
 	}
 	
 	@PostMapping("/signup")
-	public void signup( @RequestBody MyUser user) {
+	public String signup( @RequestBody MyUser user) {
+		try {
 		myUserService.addUser(user);
+		return "";
+		}catch(DataIntegrityViolationException d) {
+			return "Username already Exists";
+		}
 	}
 }

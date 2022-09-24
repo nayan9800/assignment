@@ -14,18 +14,11 @@ public class NextNumber {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private int code;
+	private int categoryCode;
 	private int value;
 	private int userId;
 	
 	public NextNumber() {}
-	
-	public NextNumber(int id, int code, int value, int userId) {
-		this.id = id;
-		this.code = code;
-		this.value = value;
-		this.userId = userId;
-	}
 
 	public int getId() {
 		return id;
@@ -35,12 +28,12 @@ public class NextNumber {
 		this.id = id;
 	}
 
-	public int getCode() {
-		return code;
+	public int getCategoryCode() {
+		return categoryCode;
 	}
 
-	public void setCode(int code) {
-		this.code = code;
+	public void setCategoryCode(int categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 	public int getValue() {
