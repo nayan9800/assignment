@@ -1,4 +1,4 @@
-package yebelo.nayan.assignment;
+package yebelo.nayan.assignment.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package yebelo.nayan.assignment;
+package yebelo.nayan.assignment.model;
 
 
 public class Code {
