@@ -20,7 +20,7 @@ public class NextNumberService {
 
 	
 	public void addNextNumber(NextNumber n,String username) {
-		
+	
 		MyUser u = myUserRepository.getByUsername(username);
 		n.setUserId(u.getId());
 		nextNumberRepository.save(n);
@@ -35,14 +35,13 @@ public class NextNumberService {
 		}
 			MyUser u = myUserRepository.getByUsername(username);
 			NextNumber byCode = nextNumberRepository.getByCategoryCodeAndUserId(code, u.getId());
-			
 			if(byCode == null) {
 				return new Values(0, 0);
 			}
 			
-			int newValue = updateValue(byCode.getValue());
-			Values v = new Values(byCode.getValue(), newValue);
-			byCode.setValue(newValue);
+			int newValue = updateValue(byCode.getNum());
+			Values v = new Values(byCode.getNum(), newValue);
+			byCode.setNum(newValue);
 			nextNumberRepository.save(byCode);
 			
 			return v;

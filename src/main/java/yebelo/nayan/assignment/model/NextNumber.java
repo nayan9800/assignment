@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "next_number")
+@Table(name = "nextnumber")
 public class NextNumber {
 
 	@Id
@@ -15,7 +15,7 @@ public class NextNumber {
 	private int id;
 
 	private int categoryCode;
-	private int value;
+	private int num;
 	private int userId;
 	
 	public NextNumber() {}
@@ -36,12 +36,12 @@ public class NextNumber {
 		this.categoryCode = categoryCode;
 	}
 
-	public int getValue() {
-		return value;
+	public int getNum() {
+		return num;
 	}
 
-	public void setValue(int value) {
-		this.value = value;
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public int getUserId() {
@@ -50,6 +50,11 @@ public class NextNumber {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	@Override
+	public String toString() {
+		return "NextNumber [id=" + id + ", categoryCode=" + categoryCode + ", num=" + num + ", userId=" + userId + "]";
 	}
 	
 	

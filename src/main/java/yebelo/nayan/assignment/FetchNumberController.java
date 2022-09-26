@@ -4,6 +4,8 @@ import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,12 +44,12 @@ public class FetchNumberController {
 	}
 	
 	@PostMapping("/signup")
-	public String signup( @RequestBody MyUser user) {
+	public ResponseEntity<String> signup( @RequestBody MyUser user) {
 		try {
 		myUserService.addUser(user);
-		return "";
+		return new ResponseEntity<String>("",HttpStatus.CREATED);
 		}catch(DataIntegrityViolationException d) {
-			return "Username already Exists";
+			return new ResponseEntity<String>("Username already Exists",HttpStatus.BAD_REQUEST);
 		}
 	}
 }
