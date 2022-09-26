@@ -1,0 +1,10 @@
+1. to run the application use './mvnw spring-boot:run'
+2. to run test in application use './mvnw test'
+3. to create jar file type './mvnw package'
+
+example application.properties file
+
+spring.datasource.url= <database url>
+spring.datasource.username= <username>
+spring.datasource.password= <password>
+spring.jpa.hibernate.ddl-auto=create

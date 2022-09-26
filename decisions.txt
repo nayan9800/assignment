@@ -1,0 +1,2 @@
+1. H2 database is used as testing in memory database.
+2. postgresql database is used as main production database
